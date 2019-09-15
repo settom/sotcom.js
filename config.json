@@ -1,0 +1,51 @@
+
+  {
+  "email"  : "", 
+
+  "password" : "",
+
+  "netcl" : "7786267",
+
+  "test" : "false",
+
+  "nonid" : "true",
+
+  "prefix" : "!",
+
+  "id" : "",
+
+  "CID" : "CID_479_Athena_Commando_F_Davinci",
+
+  "BID" : "",
+
+  "SPID" : "",
+
+  "EID" : "EID_Davinci",
+
+  "pickaxe" : "Pickaxe_ID_116_Celestial",
+
+  "battlepass" : "100, 100, 100",
+
+  "Banner" : "InfluencerBanner56",
+
+  "colorb" : "defaultcolor",
+
+  "levelb" : "100",
+
+  "friendaccept" : "false",
+
+  "ttl" : "14400",
+  
+  "type" : "default",
+
+  "SubType" : "default",
+
+  "chatEnabled" : "true",
+
+  "maxsize" : "3",
+
+  "joinConfirmation" : "true",
+
+  "joinability" : "OPEN"
+
+}
