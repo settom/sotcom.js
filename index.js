@@ -1,34 +1,25 @@
-console.log(`    _        1      13       .  {     c        +    6        =       +      `);
-console.log(' =     +     ?   -     _________________  +    -    ?     .       -    .    ');
-console.log('  /    gg  9   }   ,     bot starting!    ?     relax              -        ');
-console.log('   - ?        .     -       +      `       +     ,     .      lol        +  ');
-console.log('    -    3          +   2      +       +    -          _          =         ');
-console.log('fortnite .   -       +  _______________   .  -   |       chill   .    `    =');
-console.log('    .  =    .   `   +    By Tryloping   b    _      10               +      ');
-console.log('           0       -  =       .    a   ,     +      -        d     4    -   ');
-console.log('=   1     =      \      _    7   -        ?       karma  -   5       ?   =  ');
-console.log('  `    ,    8     .        |    11    kitten    -  =    +                   ');
-console.log('     |   `   1         e     -      0    -    -    `   _     ?   -    = /   ');
-console.log(`    _        1      13       .  {     c        +    6        =       +      `);
-console.log(' =     +     ?   -      _______________   +    -    ?     .       -    .    ');
-console.log('  /    gg  9   }   ,       Source By    ?     relax     +     -      -     .');
-console.log('   - ?        .     -       +      `       +     ,     .      lol        +  ');
-console.log('    -    3          +   2      +       +    -       ?   _          =        ');
-console.log('fortnite .   -       +  _______________         |       chill   .    `    = ');
-console.log('    .  =    .   `   +    Aqua And Syfe!   b    _      10        .    +      ');
-console.log('           0       -  =       .    a   ,best +   ?_____        d     4   -  ');
-console.log('=   1     =      \      _    7   -da  ______      karma  -   5       ?   =  ');
-console.log('  `    ,    8     .        |    11    kitten    -  =    +                   ');
-console.log('     |   `   1         e     -      0    -    -    `   _     ?   -    = /   ');
-
+console.clear()
+console.log(``)
+console.log(``)
+console.log(``)
+console.log(``)
+console.log(``)
+console.log(``)
+console.log(`                                            [READING CODE MODE!]                             `);
+console.log(`                                                                                                         `);
+console.log(`                                              _______________                                              `);
+console.log(`                                              [Reading Code!]                `);
+console.log(`                                            [Ends in 4 secunds!]                `);
+console.log(`                                            (Code by settom)                                            `)
 const request = require("request-promise");
 const EGClient = require('epicgames-client').Client;
 const Fortnite = require('epicgames-fortnite-client');
 const { ESubGame } = Fortnite;
-const { EPlatform } = require('epicgames-client');
-const { EInputType } = require('epicgames-client');
+const EPlatform = require('epicgames-client');
+const EInputType = require('epicgames-client');
 const { EPartyPrivacy } = require('epicgames-client');
 const config = require("./config.json");
+const { Launcher } = require('epicgames-client');
 
 var CID = config.CID
 var BID = config.BID // All of this is managed in the config file
@@ -37,34 +28,51 @@ var PICKAXE_ID = config.pickaxe_id
 var prefix = config.prefix
 var id = config.id
 
+
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
 let eg = new EGClient({ // For this make a new account that has nothing and put the details in here.
+  email: config.email, // Remember to add your bot account email in here or it won't work!
+  password: config.password,  // Remember to add your bot account password in here or it won't work!
+  defaultPartyconfig: {
+     privacy: EPartyPrivacy.PUBLIC,
+    joinConfirmation: config.joinConfirmation,
+    joinability: config.joinability, // Opens the party and allows it to be joined
+    maxSize: config.maxsize,
+    subType: config.SubType,
+    type: config.type,
+    inviteTTL: config.ttl,
+    chatEnabled: config.chatEnabled,
+}
+});
+
+let launcher = new Launcher({
   email: config.email, // Remember to add your bot account email in here or it won't work!
   password: config.password,  // Remember to add your bot account password in here or it won't work!
   debug: console.log,
   defaultPartyconfig: {
- 	  privacy: EPartyPrivacy.PUBLIC,
-  	joinConfirmation: config.joinConfirmation,
-  	joinability: config.joinability, // Opens the party and allows it to be joined
-  	maxSize: config.maxsize,
-	  subType: config.SubType,
-	  type: config.type,
-	  inviteTTL: config.ttl,
-  	chatEnabled: config.chatEnabled,
-}
-  });
+     privacy: EPartyPrivacy.PUBLIC,
+    joinConfirmation: config.joinConfirmation,
+    joinability: config.joinability, // Opens the party and allows it to be joined
+    maxSize: config.maxsize,
+    subType: config.SubType,
+    type: config.type,
+    inviteTTL: config.ttl,
+    chatEnabled: config.chatEnabled,
+  }
+});
+
 
   if(config.test == "false") {
   }
-    if(config.nonid == "false") {
-
-  function sleep(milliseconds) {
-var start = new Date().getTime();
-for (var i = 0; i < 1e7; i++) {
-  if ((new Date().getTime() - start) > milliseconds){
-    break;
-  }
-}
-}
+  if(config.nonid == "false") {
+    
 
     eg.init().then(async (success) => {
 
@@ -74,12 +82,14 @@ for (var i = 0; i < 1e7; i++) {
         throw new Error('Cannot initialize EpicGames launcher.');
 
       if(!await eg.login())
-        throw new Error('The bot cant login, please check your config, file.');
+      throw new Error('Cannot Login in.');
+    
 
         const fortnite = await eg.runGame(Fortnite, {
 	netCL: config.netcl,
-	partyBuildId: '1:1:' + config.netcl,
-	});
+  partyBuildId: '1:1:' + config.netcl,
+  });
+
       const br = await fortnite.runSubGame(ESubGame.BattleRoyale);
 
       fortnite.communicator.on("friend:request", async (request) => {
@@ -88,13 +98,46 @@ for (var i = 0; i < 1e7; i++) {
             }
              });
 
+             
+
       fortnite.communicator.on('party:member:joined', async (member) => {
-        console.log(`Member#${member.id} joined!`);
-        console.log(``);
+        console.clear()
+        console.log(``)
+        console.log(``)
+        console.log(``)
+        console.log(``)
+        console.log(``)
+        console.log(``)
+        console.log(`                                          [████████████████████]                               `);
+        console.log(`                                                                                               `);
+        console.log(`                                                                                               `);
+        console.log(`                                    [Member #${member.id} just joined!]                        `);
 
           fortnite.party.me.setOutfit("/Game/Athena/Items/Cosmetics/Characters/" + CID + "." + CID);
+          console.clear()
+          console.log(``)
+          console.log(``)
+          console.log(``)
+          console.log(``)
+          console.log(``)
+          console.log(``)
+          console.log(`                                          [████████████████████]                                         `);
+          console.log(`                                                                                                         `);
+          console.log(`                                                                                                         `);
+          console.log(`                                     [Joining : Bot putting on outfit]                                   `);
 
           fortnite.party.me.setBackpack("/Game/Athena/Items/Cosmetics/Backpacks/" + BID + "." + BID);
+          console.clear()
+          console.log(``)
+          console.log(``)
+          console.log(``)
+          console.log(``)
+          console.log(``)
+          console.log(``)
+          console.log(`                                          [████████████████████]                                         `);
+          console.log(`                                                                                                         `);
+          console.log(`                                                                                                         `);
+          console.log(`                                     [Joining : Bot putting on backling]                                 `);
 
           fortnite.party.me.setPickaxe("/Game/Athena/Items/Cosmetics/Pickaxes/" + PICKAXE_ID + "." + PICKAXE_ID); // ALL OF THE THINGS ARE PULLED FROM ABOVE!
 
@@ -103,15 +146,88 @@ for (var i = 0; i < 1e7; i++) {
          fortnite.party.me.setBattlePass(false);
 
 	        fortnite.party.me.setBanner(config.levelb, config.Banner, config.banner_color);
-      });
+          console.clear()
+          console.log(``)
+          console.log(``)
+          console.log(``)
+          console.log(``)
+          console.log(``)
+          console.log(``)
+          console.log(`                                          [████████████████████]                                         `);
+          console.log(`                                                                                                         `);
+          console.log(`                                                                                                         `);
+          console.log(`                                        [Party Invite : Joined !]                                        `);
+        });
 
       fortnite.communicator.on('party:invitation', async (invitation) => {
+        console.clear()
+        console.log(``)
+        console.log(``)
+        console.log(``)
+        console.log(``)
+        console.log(``)
+        console.log(``)
+        console.log(`                                          [████████████████████]                                         `);
+        console.log(`                                                                                                         `);
+        console.log(`                                                                                                         `);
+        console.log(`                                 [Party Invite : Invitation accepting.]                                  `);
         await invitation.accept()
+        sleep(1000)
+        console.clear()
+        console.log(``)
+        console.log(``)
+        console.log(``)
+        console.log(``)
+        console.log(``)
+        console.log(``)
+        console.log(`                                          [████████████████████]                                         `);
+        console.log(`                                                                                                         `);
+        console.log(`                                                                                                         `);
+        console.log(`                               [Party Joined : Joined party from invitation!]                            `);
           });
+
+          console.clear()
+          console.log(``)
+          console.log(``)
+          console.log(``)
+          console.log(``)
+          console.log(``)
+          console.log(``)
+          console.log(`                                           [██████████████...]                                            `);
+          console.log(`                                                                                                         `);
+          console.log(`                                   ______________________________________                               `);
+          console.log(`                                   [Fortnite: Exchanging access token...]                                `);
+          console.log(`                                           (Code by settom)                                            `)
+          sleep(05000)
+          console.clear()
+          console.log(``)
+          console.log(``)
+          console.log(``)
+          console.log(``)
+          console.log(``)
+          console.log(``)
+          console.log(`                                          [██████████████...]                                            `);
+          console.log(`                                                                                                         `);
+          console.log(`                                   ___________________________________                                   `);
+          console.log(`                                   [Fortnite: Access token exchanged!]                                   `);
+          console.log(`                                          (Code by settom)                                            `)
+          sleep(3000)
+          console.clear()
+          console.log(``)
+          console.log(``)
+          console.log(``)
+          console.log(``)
+          console.log(`  '   =                        +                    ]                       -                            `)
+          console.log(`               +                                    ?                       .       /                    `)
+          console.log(`      /                   .              [████████████████████]         {            |         '         `);
+          console.log(`               try                                                 ;                                     `);
+          console.log(`   loping                             ;                                                                  `);
+          console.log(`                        [Fortnite: Party ${fortnite.party.id} has been created.]                          `);
 
       eg.communicator.on('friend:message', async (data) => {
 
         if(data.message == prefix +'help'){
+          console.clear()
           eg.communicator.sendMessage(data.friend.id, 'Commands: CID_ , EID_ , BID_ ,' + prefix + 'banner, ' + prefix + 'cn-semote, cn-bp, cn-status, cn-ready, cn-unready, cn-input, cn-platform');
     }
 
@@ -254,7 +370,7 @@ for (var i = 0; i < 1e7; i++) {
             if(args[0] === prefix +"peelymech") {
               if(data.friend.id == id) {
                 fortnite.party.me.setEmote("/Game/Athena/Items/Cosmetics/Dances/EID_Davinci.EID_Davinci");
-                sleep(5555)
+                sleep(10)
                 fortnite.party.me.setOutfit("/Game/Athena/Items/Cosmetics/Characters/CID_534_Athena_Commando_M_PeelyMech.CID_534_Athena_Commando_M_PeelyMech");
                     } else {
                   eg.communicator.sendMessage(data.friend.id, "Error 1: Permisson needed.");
@@ -314,7 +430,6 @@ for (var i = 0; i < 1e7; i++) {
                         eg.communicator.sendMessage(data.friend.id, "Error 1: Permisson needed.");
                         }
                       }
-                      
                     
                       });
                     });
@@ -616,4 +731,5 @@ for (var i = 0; i < 1e7; i++) {
                                             
                     });
                   });
-                  }
+                }
+         
