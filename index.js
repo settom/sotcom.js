@@ -1,25 +1,35 @@
-console.clear()
-console.log(``)
-console.log(``)
-console.log(``)
-console.log(``)
-console.log(``)
-console.log(``)
-console.log(`                                            [READING CODE MODE!]                             `);
-console.log(`                                                                                                         `);
-console.log(`                                              _______________                                              `);
-console.log(`                                              [Reading Code!]                `);
-console.log(`                                            [Ends in 4 secunds!]                `);
-console.log(`                                            (Code by settom)                                            `)
+console.log(`    _        1      13       .  {     c        +    6        =       +      `);
+console.log(' =     +     ?   -     _________________  +    -    ?     .       -    .    ');
+console.log('  /    gg  9   }   ,     bot starting!    ?     relax              -        ');
+console.log('   - ?        .     -       +      `       +     ,     .      lol        +  ');
+console.log('    -    3          +   2      +       +    -          _          =         ');
+console.log('fortnite .   -       +  _______________   .  -   |       chill   .    `    =');
+console.log('    .  =    .   `   +    By Tryloping   b    _      10               +      ');
+console.log('           0       -  =       .    a   ,     +      -        d     4    -   ');
+console.log('=   1     =      \      _    7   -        ?       karma  -   5       ?   =  ');
+console.log('  `    ,    8     .        |    11    kitten    -  =    +                   ');
+console.log('     |   `   1         e     -      0    -    -    `   _     ?   -    = /   ');
+console.log(`    _        1      13       .  {     c        +    6        =       +      `);
+console.log(' =     +     ?   -      _______________   +    -    ?     .       -    .    ');
+console.log('  /    gg  9   }   ,       Source By    ?     relax     +     -      -     .');
+console.log('   - ?        .     -       +      `       +     ,     .      lol        +  ');
+console.log('    -    3          +   2      +       +    -       ?   _          =        ');
+console.log('fortnite .   -       +  _______________         |       chill   .    `    = ');
+console.log('    .  =    .   `   +    Aqua And Syfe!   b    _      10        .    +      ');
+console.log('           0       -  =       .    a   ,best +   ?_____        d     4   -  ');
+console.log('=   1     =      \      _    7   -da  ______      karma  -   5       ?   =  ');
+console.log('  `    ,    8     .        |    11    kitten    -  =    +                   ');
+console.log('     |   `   1         e     -      0    -    -    `   _     ?   -    = /   ');
+
 const request = require("request-promise");
 const EGClient = require('epicgames-client').Client;
 const Fortnite = require('epicgames-fortnite-client');
 const { ESubGame } = Fortnite;
-const EPlatform = require('epicgames-client');
-const EInputType = require('epicgames-client');
+const { EPlatform } = require('epicgames-client');
+const { EInputType } = require('epicgames-client');
 const { EPartyPrivacy } = require('epicgames-client');
 const config = require("./config.json");
-const { Launcher } = require('epicgames-client');
+const bannedids = require("./bannedids.json");
 
 var CID = config.CID
 var BID = config.BID // All of this is managed in the config file
@@ -27,52 +37,35 @@ var EID = config.EID
 var PICKAXE_ID = config.pickaxe_id
 var prefix = config.prefix
 var id = config.id
+var bannedid = bannedids.bannedids
 
-
-function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
-    if ((new Date().getTime() - start) > milliseconds){
-      break;
-    }
-  }
-}
 let eg = new EGClient({ // For this make a new account that has nothing and put the details in here.
-  email: config.email, // Remember to add your bot account email in here or it won't work!
-  password: config.password,  // Remember to add your bot account password in here or it won't work!
-  defaultPartyconfig: {
-     privacy: EPartyPrivacy.PUBLIC,
-    joinConfirmation: config.joinConfirmation,
-    joinability: config.joinability, // Opens the party and allows it to be joined
-    maxSize: config.maxsize,
-    subType: config.SubType,
-    type: config.type,
-    inviteTTL: config.ttl,
-    chatEnabled: config.chatEnabled,
-}
-});
-
-let launcher = new Launcher({
   email: config.email, // Remember to add your bot account email in here or it won't work!
   password: config.password,  // Remember to add your bot account password in here or it won't work!
   debug: console.log,
   defaultPartyconfig: {
-     privacy: EPartyPrivacy.PUBLIC,
-    joinConfirmation: config.joinConfirmation,
-    joinability: config.joinability, // Opens the party and allows it to be joined
-    maxSize: config.maxsize,
-    subType: config.SubType,
-    type: config.type,
-    inviteTTL: config.ttl,
-    chatEnabled: config.chatEnabled,
-  }
-});
-
-
+ 	  privacy: EPartyPrivacy.PUBLIC,
+  	joinConfirmation: config.joinConfirmation,
+  	joinability: config.joinability, // Opens the party and allows it to be joined
+  	maxSize: config.maxsize,
+	  subType: config.SubType,
+	  type: config.type,
+	  inviteTTL: config.ttl,
+  	chatEnabled: config.chatEnabled,
+}
+  });
   if(config.test == "false") {
   }
-  if(config.nonid == "false") {
-    
+    if(config.nonid == "false") {
+
+  function sleep(milliseconds) {
+var start = new Date().getTime();
+for (var i = 0; i < 1e7; i++) {
+  if ((new Date().getTime() - start) > milliseconds){
+    break;
+  }
+}
+}
 
     eg.init().then(async (success) => {
 
@@ -82,24 +75,19 @@ let launcher = new Launcher({
         throw new Error('Cannot initialize EpicGames launcher.');
 
       if(!await eg.login())
-      throw new Error('Cannot Login in.');
-    
+        throw new Error('The bot cant login, please check your config, file.');
 
         const fortnite = await eg.runGame(Fortnite, {
 	netCL: config.netcl,
-  partyBuildId: '1:1:' + config.netcl,
-  });
-
+	partyBuildId: '1:1:' + config.netcl,
+	});
       const br = await fortnite.runSubGame(ESubGame.BattleRoyale);
 
       fortnite.communicator.on("friend:request", async (request) => {
         if(config.friendaccept == "true"){
                await request.accept();
             }
-             });
-
-             
-
+             });   
       fortnite.communicator.on('party:member:joined', async (member) => {
         console.clear()
         console.log(``)
@@ -146,72 +134,31 @@ let launcher = new Launcher({
          fortnite.party.me.setBattlePass(false);
 
 	        fortnite.party.me.setBanner(config.levelb, config.Banner, config.banner_color);
-          console.clear()
-          console.log(``)
-          console.log(``)
-          console.log(``)
-          console.log(``)
-          console.log(``)
-          console.log(``)
-          console.log(`                                          [████████████████████]                                         `);
-          console.log(`                                                                                                         `);
-          console.log(`                                                                                                         `);
-          console.log(`                                        [Party Invite : Joined !]                                        `);
+          console.log(`Joining Party`)
         });
 
       fortnite.communicator.on('party:invitation', async (invitation) => {
-        console.clear()
-        console.log(``)
-        console.log(``)
-        console.log(``)
-        console.log(``)
-        console.log(``)
-        console.log(``)
-        console.log(`                                          [████████████████████]                                         `);
-        console.log(`                                                                                                         `);
-        console.log(`                                                                                                         `);
-        console.log(`                                 [Party Invite : Invitation accepting.]                                  `);
+        console.log(`Accepting party invitation.`)
         await invitation.accept()
         sleep(1000)
-        console.clear()
-        console.log(``)
-        console.log(``)
-        console.log(``)
-        console.log(``)
-        console.log(``)
-        console.log(``)
-        console.log(`                                          [████████████████████]                                         `);
-        console.log(`                                                                                                         `);
-        console.log(`                                                                                                         `);
-        console.log(`                               [Party Joined : Joined party from invitation!]                            `);
+        console.log(`Joined!`)
           });
 
+      eg.communicator.on('friend:message', async (data) => {
+
+        if(data.message == prefix +'help'){
           console.clear()
-          console.log(``)
-          console.log(``)
-          console.log(``)
-          console.log(``)
-          console.log(``)
-          console.log(``)
-          console.log(`                                           [██████████████...]                                            `);
-          console.log(`                                                                                                         `);
-          console.log(`                                   ______________________________________                               `);
-          console.log(`                                   [Fortnite: Exchanging access token...]                                `);
-          console.log(`                                           (Code by settom)                                            `)
-          sleep(05000)
-          console.clear()
-          console.log(``)
-          console.log(``)
-          console.log(``)
-          console.log(``)
-          console.log(``)
-          console.log(``)
-          console.log(`                                          [██████████████...]                                            `);
-          console.log(`                                                                                                         `);
-          console.log(`                                   ___________________________________                                   `);
-          console.log(`                                   [Fortnite: Access token exchanged!]                                   `);
-          console.log(`                                          (Code by settom)                                            `)
-          sleep(3000)
+          eg.communicator.sendMessage(data.friend.id, 'Commands: CID_ , EID_ , BID_ ,' + prefix + 'banner, ' + prefix + 'cn-semote, cn-bp, cn-status, cn-ready, cn-unready, cn-input, cn-platform');
+        }
+        if(data.friend.id == bannedid) { 
+          eg.communicator.sendMessage(data.friend.id, "Your banned from using this bot because of many reasons.");     
+        }
+  
+
+        var test = ""
+        var args = data.message.split(" ");
+
+        if(config.id == ""){
           console.clear()
           console.log(``)
           console.log(``)
@@ -222,23 +169,18 @@ let launcher = new Launcher({
           console.log(`      /                   .              [████████████████████]         {            |         '         `);
           console.log(`               try                                                 ;                                     `);
           console.log(`   loping                             ;                                                                  `);
-          console.log(`                        [Fortnite: Party ${fortnite.party.id} has been created.]                          `);
-
-      eg.communicator.on('friend:message', async (data) => {
-
-        if(data.message == prefix +'help'){
-          console.clear()
-          eg.communicator.sendMessage(data.friend.id, 'Commands: CID_ , EID_ , BID_ ,' + prefix + 'banner, ' + prefix + 'cn-semote, cn-bp, cn-status, cn-ready, cn-unready, cn-input, cn-platform');
-    }
-
-        var test = ""
-        var args = data.message.split(" ");
+          console.log(`                        [You have no id in your config, i would put my id in if i was u.]                          `);
+          console.log(``)
+        }
 
     if(args[0].includes('EID_')){
       if(data.friend.id == id) {       
         fortnite.party.me.clearEmote();
         fortnite.party.me.setEmote("/Game/Athena/Items/Cosmetics/Dances/" + args[0] + "." + args[0]);
         fortnite.communicator.sendMessage(data.friend.id, "Emote set to " + args[0]);
+      }
+      if(data.friend.id == bannedid) { 
+        eg.communicator.sendMessage(data.friend.id, "Your banned from using this bot because of many reasons.");     
       } else {
           eg.communicator.sendMessage(data.friend.id, "Error 1: Permisson needed.");
         }
@@ -251,6 +193,9 @@ let launcher = new Launcher({
           fortnite.party.me.clearEmote();
           fortnite.party.me.setEmote("/Game/Athena/Items/Cosmetics/Dances/" + args[0] + "." + args[0]);
           eg.communicator.sendMessage(data.friend.id, "Emote set to " + args[0]);
+        }
+        if(data.friend.id == bannedid) { 
+          eg.communicator.sendMessage(data.friend.id, "Your banned from using this bot because of many reasons.");     
         } else {
           eg.communicator.sendMessage(data.friend.id, "Please use EID");
         }
@@ -261,6 +206,9 @@ let launcher = new Launcher({
         PICKAXE_ID = args
         fortnite.party.me.setPickaxe("/Game/Athena/Items/Cosmetics/Pickaxes/" + args[0] + "." + args[0]);
           eg.communicator.sendMessage(data.friend.id, "Pickaxe set to " + args[0]);
+        }
+        if(data.friend.id == bannedid) { 
+          eg.communicator.sendMessage(data.friend.id, "Your banned from using this bot because of many reasons.");     
         } else {
           eg.communicator.sendMessage(data.friend.id, "Please use Pickaxe_ID");
         }
@@ -272,6 +220,9 @@ let launcher = new Launcher({
           fortnite.party.me.clearEmote();
           fortnite.party.me.setEmote("/Game/Athena/Items/Cosmetics/Dances/" + args[0] + "." + args[0]);
           fortnite.communicator.sendMessage(data.friend.id, "Emote set to " + args[0]);
+        }
+        if(data.friend.id == bannedid) { 
+          eg.communicator.sendMessage(data.friend.id, "Your banned from using this bot because of many reasons.");     
         } else {
             eg.communicator.sendMessage(data.friend.id, "Error 1: Permisson needed.");
           }
@@ -283,6 +234,9 @@ let launcher = new Launcher({
         BID = args[0];
           fortnite.party.me.setBackpack("/Game/Athena/Items/Cosmetics/Backpacks/" + args[0] + "." + args[0]);
           eg.communicator.sendMessage(data.friend.id, "Backbling set to " + args[0]);
+        }
+        if(data.friend.id == bannedid) { 
+          eg.communicator.sendMessage(data.friend.id, "Your banned from using this bot because of many reasons.");     
         } else {
             eg.communicator.sendMessage(data.friend.id, "Error 1: Permisson needed.");
           }
@@ -293,6 +247,9 @@ let launcher = new Launcher({
       if(data.friend.id == id) {
         fortnite.party.me.setOutfit("/Game/Athena/Items/Cosmetics/Characters/" + args[0] + "." + args[0]);
         eg.communicator.sendMessage(data.friend.id, "Skin set to " + args[0]);
+      }
+      if(data.friend.id == bannedid) { 
+        eg.communicator.sendMessage(data.friend.id, "Your banned from using this bot because of many reasons.");     
             } else {
           eg.communicator.sendMessage(data.friend.id, "Error 1: Permisson needed.");
           }
@@ -301,6 +258,9 @@ let launcher = new Launcher({
         if (args[0].toLowerCase() == prefix + "leave"){
           fortnite.party.leave();
           eg.communicator.sendMessage(data.friend.id, "Your Bot left the party");
+        }
+        if(data.friend.id == bannedid) { 
+          eg.communicator.sendMessage(data.friend.id, "Your banned from using this bot because of many reasons.");     
   }
 
         if(args[0].includes('Pickaxe_ID_')){
@@ -308,6 +268,9 @@ let launcher = new Launcher({
             PICKAXE_ID = args[0];
             fortnite.party.me.setPickaxe("/Game/Athena/Items/Cosmetics/Pickaxes/" + args[0] + "." + args[0]);
             eg.communicator.sendMessage(data.friend.id, "Pickaxe set to " + args[0]);
+          }
+          if(data.friend.id == bannedid) { 
+            eg.communicator.sendMessage(data.friend.id, "Your banned from using this bot because of many reasons.");     
           } else {
               eg.communicator.sendMessage(data.friend.id, "Error 1: Permisson needed.");
             }
@@ -318,15 +281,45 @@ let launcher = new Launcher({
           var mess = data.message.replace(prefix + "status", "");
           fortnite.communicator.updateStatus(mess);
           eg.communicator.sendMessage(data.friend.id, 'Status set to ' + mess + "!");
+        }
+        if(data.friend.id == bannedid) { 
+          eg.communicator.sendMessage(data.friend.id, "Your banned from using this bot because of many reasons.");     
               } else {
             eg.communicator.sendMessage(data.friend.id, "Error 1: Permisson needed.");
             }
         }
 
+        if(args[0] === prefix + "id") {
+          if(data.friend.id == id) {
+            const playerName = args[0];
+            const account = launcher.getProfile(playerName);
+            console.clear()
+            console.log(``)
+            console.log(``)
+            console.log(``)
+            console.log(``)
+            console.log(``)
+            console.log(``)
+            console.log(`                                          [Getting ID! of ${account.name} !]                                         `);
+            console.log(`                                                                                                         `);
+            console.log(`                                                                                                         `);
+            console.log(`                                   [${account.name}'s id: ${account.id}]                            `);
+            eg.communicator.sendMessage(data.friend.id, ' ' + account.name + "'s id is " + account.id);
+          }
+          if(data.friend.id == bannedid) { 
+            eg.communicator.sendMessage(data.friend.id, "Your banned from using this bot because of many reasons.");     
+          } else {
+              eg.communicator.sendMessage(data.friend.id, "Error 1: Permisson needed.");
+              }
+          }
+
           if(args[0] === prefix +"gbp") {
             if(data.friend.id == id) {
               fortnite.party.me.setBattlePass(true, 77, 120, 110);
               eg.communicator.sendMessage(data.friend.id, "Gave Battle Pass!");
+            }
+            if(data.friend.id == bannedid) { 
+              eg.communicator.sendMessage(data.friend.id, "Your banned from using this bot because of many reasons.");     
                   } else {
                 eg.communicator.sendMessage(data.friend.id, "not allowed");
                 }
@@ -335,6 +328,9 @@ let launcher = new Launcher({
             if(args[0] === test +"prefix") {
               if(data.friend.id == id) {
                 eg.communicator.sendMessage(data.friend.id, "The Current Prefix is, " + prefix);
+              }
+              if(data.friend.id == bannedid) { 
+                eg.communicator.sendMessage(data.friend.id, "Your banned from using this bot because of many reasons.");     
                     } else {
                   eg.communicator.sendMessage(data.friend.id, "not allowed");
                   }
@@ -344,6 +340,9 @@ let launcher = new Launcher({
         if(data.friend.id == id) {
           fortnite.party.me.setBattlePass(false);
           eg.communicator.sendMessage(data.friend.id, "Removed Battle Pass!");
+        }
+        if(data.friend.id == bannedid) { 
+          eg.communicator.sendMessage(data.friend.id, "Your banned from using this bot because of many reasons.");     
               } else {
             eg.communicator.sendMessage(data.friend.id, "Error 1: Permisson needed.");
             }
@@ -353,6 +352,9 @@ let launcher = new Launcher({
           if(data.friend.id == id) {
             fortnite.party.me.setBanner(100, args[1], args[2]);
             eg.communicator.sendMessage(data.friend.id, "Banner set to " + args[1] + " " + args[2]);
+          }
+          if(data.friend.id == bannedid) { 
+            eg.communicator.sendMessage(data.friend.id, "Your banned from using this bot because of many reasons.");     
                 } else {
               eg.communicator.sendMessage(data.friend.id, "Error 1: Permisson needed.");
               }
@@ -362,6 +364,9 @@ let launcher = new Launcher({
             if(data.friend.id == id) {
               fortnite.party.me.setReady(true);
               eg.communicator.sendMessage(data.friend.id, "Fake Ready!");
+            }
+            if(data.friend.id == bannedid) { 
+              eg.communicator.sendMessage(data.friend.id, "Your banned from using this bot because of many reasons.");     
                   } else {
                 eg.communicator.sendMessage(data.friend.id, "Error 1: Permisson needed.");
                 }
@@ -372,7 +377,10 @@ let launcher = new Launcher({
                 fortnite.party.me.setEmote("/Game/Athena/Items/Cosmetics/Dances/EID_Davinci.EID_Davinci");
                 sleep(10)
                 fortnite.party.me.setOutfit("/Game/Athena/Items/Cosmetics/Characters/CID_534_Athena_Commando_M_PeelyMech.CID_534_Athena_Commando_M_PeelyMech");
-                    } else {
+              }
+              if(data.friend.id == bannedid) { 
+                eg.communicator.sendMessage(data.friend.id, "Your banned from using this bot because of many reasons.");           
+              } else {
                   eg.communicator.sendMessage(data.friend.id, "Error 1: Permisson needed.");
                   }
               }
@@ -381,6 +389,9 @@ let launcher = new Launcher({
                 if(data.friend.id == id) {
                   fortnite.party.me.setEmote("/Game/Athena/Items/Cosmetics/Dances/EID_Davinci.EID_Davinci");
                   fortnite.party.me.setOutfit("/Game/Athena/Items/Cosmetics/Characters/CID_479_Athena_Commando_F_Davinci.CID_479_Athena_Commando_F_Davinci");
+                }
+                if(data.friend.id == bannedid) { 
+                  eg.communicator.sendMessage(data.friend.id, "Your banned from using this bot because of many reasons.");     
                       } else {
                     eg.communicator.sendMessage(data.friend.id, "Error 1: Permisson needed.");
                     }
@@ -390,6 +401,9 @@ let launcher = new Launcher({
               if(data.friend.id == id) {
                 fortnite.party.me.setReady(false);
                 eg.communicator.sendMessage(data.friend.id, "Unready!");
+              }
+              if(data.friend.id == bannedid) { 
+                eg.communicator.sendMessage(data.friend.id, "Your banned from using this bot because of many reasons.");     
                     } else {
                   eg.communicator.sendMessage(data.friend.id, "Error 1: Permisson needed.");
                   }
@@ -399,6 +413,9 @@ let launcher = new Launcher({
             if(data.friend.id == id) {
               fortnite.party.me.setBattlePass(true, args[1], args[2], args[3]);
               eg.communicator.sendMessage(data.friend.id, "BP set to " + args[1] + " " + args[2] + " " + args[3] + "! BTW this command doesn't even work.");
+            }
+            if(data.friend.id == bannedid) { 
+              eg.communicator.sendMessage(data.friend.id, "Your banned from using this bot because of many reasons.");     
                   } else {
                 eg.communicator.sendMessage(data.friend.id, "Error 1: Permisson needed.");
                 }
@@ -408,6 +425,9 @@ let launcher = new Launcher({
             if(data.friend.id == id) {
               fortnite.party.me.clearEmote();
               eg.communicator.sendMessage(data.friend.id, "Emote cleared!");
+            }
+            if(data.friend.id == bannedid) { 
+              eg.communicator.sendMessage(data.friend.id, "Your banned from using this bot because of many reasons.");     
                   } else {
                 eg.communicator.sendMessage(data.friend.id, "Error 1: Permisson needed.");
                 }
@@ -417,6 +437,9 @@ let launcher = new Launcher({
                 if(data.friend.id == id) {
                   fortnite.party.me.setPlatform(args[1]);
                   eg.communicator.sendMessage(data.friend.id, "Set Platform to " + args[1] + " !");
+                }
+                if(data.friend.id == bannedid) { 
+                  eg.communicator.sendMessage(data.friend.id, "Your banned from using this bot because of many reasons.");     
                       } else {
                     eg.communicator.sendMessage(data.friend.id, "Error 1: Permisson needed.");
                     }
@@ -426,6 +449,9 @@ let launcher = new Launcher({
                     if(data.friend.id == id) {
                       fortnite.party.me.setInputType(args[1]);
                       eg.communicator.sendMessage(data.friend.id, "Set Input to " + args[1] + " !");
+                    }
+                    if(data.friend.id == bannedid) { 
+                      eg.communicator.sendMessage(data.friend.id, "Your banned from using this bot because of many reasons.");     
                           } else {
                         eg.communicator.sendMessage(data.friend.id, "Error 1: Permisson needed.");
                         }
