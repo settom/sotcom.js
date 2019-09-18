@@ -29,14 +29,45 @@ const { EPlatform } = require('epicgames-client');
 const { EInputType } = require('epicgames-client');
 const { EPartyPrivacy } = require('epicgames-client');
 const config = require("./config.json");
+const ids = require("./ids.json");
 const bannedids = require("./bannedids.json");
+const { Launcher } = require('epicgames-client');
+
+const launcher = new Launcher({
+  email: config.email, // Remember to add your bot account email in here or it won't work!
+  password: config.password,  // Remember to add your bot account password in here or it won't work!
+});
+
+(async () => {
+
+  if(!await launcher.init() || !await launcher.login()) {
+    throw new Error('Error while initialize or login process.');
+  }
+	
+  console.log(`Logged account's id: ${launcher.account.id}`);
+  console.log(`Logged account's name: ${launcher.account.name}`);
+
+})();
+
+(async () => {
+
+  
+  if(!await launcher.init() || !await launcher.login()) {
+    throw new Error('Error while initialize or login process.');
+  }
+
+  const playerName = config.findid;
+  const account = await launcher.getProfile(playerName);
+  if(!account) throw new Error(`Player ${playerName} not found!`);
+  console.log(`The id that u wanted was, ${account.name}, the id is ${account.id}`)
+})();
 
 var CID = config.CID
 var BID = config.BID // All of this is managed in the config file
 var EID = config.EID
 var PICKAXE_ID = config.pickaxe_id
 var prefix = config.prefix
-var id = config.id
+var id = ids.id
 var bannedid = bannedids.bannedids
 
 let eg = new EGClient({ // For this make a new account that has nothing and put the details in here.
@@ -134,14 +165,44 @@ for (var i = 0; i < 1e7; i++) {
          fortnite.party.me.setBattlePass(false);
 
 	        fortnite.party.me.setBanner(config.levelb, config.Banner, config.banner_color);
-          console.log(`Joining Party`)
+          console.clear()
+          console.log(``)
+          console.log(``)
+          console.log(``)
+          console.log(``)
+          console.log(``)
+          console.log(``)
+          console.log(`                                          [████████████████████]                                         `);
+          console.log(`                                                                                                         `);
+          console.log(`                                                                                                         `);
+          console.log(`                                        [Party Invite : Joined !]                                        `);
         });
 
       fortnite.communicator.on('party:invitation', async (invitation) => {
-        console.log(`Accepting party invitation.`)
+        console.clear()
+        console.log(``)
+        console.log(``)
+        console.log(``)
+        console.log(``)
+        console.log(``)
+        console.log(``)
+        console.log(`                                          [████████████████████]                                         `);
+        console.log(`                                                                                                         `);
+        console.log(`                                                                                                         `);
+        console.log(`                                 [Party Invite : Invitation accepting.]                                  `);
         await invitation.accept()
         sleep(1000)
-        console.log(`Joined!`)
+        console.clear()
+        console.log(``)
+        console.log(``)
+        console.log(``)
+        console.log(``)
+        console.log(``)
+        console.log(``)
+        console.log(`                                          [████████████████████]                                         `);
+        console.log(`                                                                                                         `);
+        console.log(`                                                                                                         `);
+        console.log(`                               [Party Joined : Joined party from invitation!]                            `);
           });
 
       eg.communicator.on('friend:message', async (data) => {
