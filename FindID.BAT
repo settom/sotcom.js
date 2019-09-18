@@ -1,2 +1,0 @@
-node findidindex.js
-pause
